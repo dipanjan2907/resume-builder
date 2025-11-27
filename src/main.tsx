@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import logo from ".src/assets/logo.png";
+import logo from "./assets/logo.png";
 
 // Splash Screen Component
 const SplashScreen = ({ onComplete }) => {

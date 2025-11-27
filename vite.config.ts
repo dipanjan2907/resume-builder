@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  base: "/resume-builder/", // GitHub Pages repo name
+  base: "/resume-builder/", // Replace with your GitHub repo name
   plugins: [react()],
 });
 

@@ -1,13 +1,22 @@
 import React, { useState } from "react";
-import { AIAssistant } from "./AIAssistant";
+import { AIAssistant } from "./components/AIAssistant";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { LoginView } from "./LoginView";
+import { LoginView } from "./components/LoginView";
 import { StrengthMeter } from "./components/StrengthMeter";
 import { JobMatcher } from "./components/JobMatcher";
 import { WebProfile } from "./components/WebProfile";
-import logo from ".src/assets/logo.png";
-import logo1 from ".src/assets/logo1.png";
+import logo from "./assets/logo.png";
+import logo1 from "./assets/logo1.png";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css"; // if you have CSS
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
 import {
   FileText,
