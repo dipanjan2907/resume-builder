@@ -778,8 +778,237 @@ const HomeView = ({ setCurrentView }: any) => {
         </div>
       </div>
 
+      {/* How It Works Section */}
+      <div style={{ padding: "100px 20px", background: colors.background }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "60px" }}>
+            <h2
+              style={{
+                fontSize: "36px",
+                fontWeight: 700,
+                color: colors.primary,
+                marginBottom: "16px",
+              }}
+            >
+              How It Works
+            </h2>
+            <p style={{ fontSize: "18px", color: colors.textLight }}>
+              Three simple steps to your new career
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: "40px",
+            }}
+          >
+            {[
+              {
+                step: "1",
+                title: "Choose a Template",
+                desc: "Select from our professional, ATS-friendly designs.",
+                icon: <Layout size={32} color={colors.accent} />,
+              },
+              {
+                step: "2",
+                title: "Enter Your Details",
+                desc: "Fill in your experience, education, and skills.",
+                icon: <PenTool size={32} color={colors.accent} />,
+              },
+              {
+                step: "3",
+                title: "Download & Apply",
+                desc: "Export as PDF and start applying to your dream jobs.",
+                icon: <Download size={32} color={colors.accent} />,
+              },
+            ].map((item) => (
+              <div
+                key={item.step}
+                style={{
+                  background: "white",
+                  padding: "40px",
+                  borderRadius: "16px",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                  textAlign: "center",
+                  position: "relative",
+                }}
+              >
+                <div
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                    background: `${colors.accent}15`,
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "0 auto 24px",
+                  }}
+                >
+                  {item.icon}
+                </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "20px",
+                    right: "20px",
+                    width: "30px",
+                    height: "30px",
+                    background: colors.primary,
+                    color: "white",
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: 700,
+                    fontSize: "14px",
+                  }}
+                >
+                  {item.step}
+                </div>
+                <h3
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: 700,
+                    marginBottom: "12px",
+                    color: colors.primary,
+                  }}
+                >
+                  {item.title}
+                </h3>
+                <p style={{ color: colors.textLight, lineHeight: "1.6" }}>
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Recommended Jobs Section (Scrolling) */}
+      <div style={{ padding: "80px 0", background: "white", overflow: "hidden" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto 40px", padding: "0 20px" }}>
+          <h2
+            style={{
+              fontSize: "36px",
+              fontWeight: 700,
+              color: colors.primary,
+              textAlign: "center",
+            }}
+          >
+            Recommended Jobs
+          </h2>
+          <p style={{ textAlign: "center", color: colors.textLight, marginTop: "10px" }}>
+            Top opportunities curated for you
+          </p>
+        </div>
+        
+        <div className="logo-track" style={{ gap: "24px", padding: "20px 0" }}>
+          {[
+            { role: "Senior React Developer", company: "TechMahindra", loc: "Bengaluru, India", match: 98, tags: ["React", "Redux", "TypeScript"] },
+            { role: "Full Stack Engineer", company: "Swiggy", loc: "Bengaluru, India", match: 95, tags: ["Node.js", "React", "AWS"] },
+            { role: "Frontend Engineer", company: "Razorpay", loc: "Bengaluru, India", match: 92, tags: ["React", "Design Systems"] },
+            { role: "SDE II", company: "Flipkart", loc: "Bengaluru, India", match: 90, tags: ["Java", "Spring Boot", "React"] },
+            { role: "Product Engineer", company: "Postman", loc: "Bengaluru, India", match: 88, tags: ["JavaScript", "API", "React"] },
+            { role: "UI Developer", company: "Zomato", loc: "Gurugram, India", match: 85, tags: ["Vue.js", "CSS", "HTML"] },
+            { role: "Software Engineer", company: "Microsoft", loc: "Hyderabad, India", match: 96, tags: ["C#", ".NET", "React"] },
+            { role: "Backend Developer", company: "Zerodha", loc: "Bengaluru, India", match: 89, tags: ["Go", "PostgreSQL"] },
+            // Duplicates for seamless scroll
+            { role: "Senior React Developer", company: "TechMahindra", loc: "Bengaluru, India", match: 98, tags: ["React", "Redux", "TypeScript"] },
+            { role: "Full Stack Engineer", company: "Swiggy", loc: "Bengaluru, India", match: 95, tags: ["Node.js", "React", "AWS"] },
+            { role: "Frontend Engineer", company: "Razorpay", loc: "Bengaluru, India", match: 92, tags: ["React", "Design Systems"] },
+            { role: "SDE II", company: "Flipkart", loc: "Bengaluru, India", match: 90, tags: ["Java", "Spring Boot", "React"] },
+            { role: "Product Engineer", company: "Postman", loc: "Bengaluru, India", match: 88, tags: ["JavaScript", "API", "React"] },
+            { role: "UI Developer", company: "Zomato", loc: "Gurugram, India", match: 85, tags: ["Vue.js", "CSS", "HTML"] },
+            { role: "Software Engineer", company: "Microsoft", loc: "Hyderabad, India", match: 96, tags: ["C#", ".NET", "React"] },
+            { role: "Backend Developer", company: "Zerodha", loc: "Bengaluru, India", match: 89, tags: ["Go", "PostgreSQL"] },
+          ].map((job, i) => (
+            <div
+              key={i}
+              className="hover-card"
+              style={{
+                minWidth: "300px",
+                padding: "24px",
+                background: "white",
+                borderRadius: "12px",
+                border: `1px solid ${colors.border}`,
+                position: "relative",
+                flexShrink: 0,
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  top: "12px",
+                  right: "12px",
+                  background: `${colors.success}15`,
+                  color: colors.success,
+                  padding: "4px 12px",
+                  borderRadius: "20px",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                }}
+              >
+                {job.match}% Match
+              </div>
+              <h3
+                style={{
+                  fontSize: "18px",
+                  fontWeight: 700,
+                  marginBottom: "4px",
+                  color: colors.primary,
+                }}
+              >
+                {job.role}
+              </h3>
+              <p
+                style={{
+                  color: colors.textLight,
+                  fontSize: "14px",
+                  marginBottom: "16px",
+                }}
+              >
+                {job.company} • {job.loc}
+              </p>
+              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "16px" }}>
+                {job.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      background: colors.background,
+                      padding: "4px 12px",
+                      borderRadius: "4px",
+                      fontSize: "12px",
+                      color: colors.textLight,
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <button
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  background: colors.primary,
+                  color: "white",
+                  border: "none",
+                  borderRadius: "6px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                }}
+              >
+                Apply Now
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Why Choose Xenvra Section */}
-      <div style={{ padding: "80px 20px", background: "white" }}>
+      <div style={{ padding: "80px 20px", background: colors.background }}>
         <div
           style={{
             maxWidth: "1200px",
@@ -937,225 +1166,6 @@ const HomeView = ({ setCurrentView }: any) => {
                 </h3>
                 <p style={{ color: colors.textLight, lineHeight: "1.6" }}>
                   {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Job Recommendations Section */}
-      <div style={{ padding: "80px 20px", background: "white" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2
-            style={{
-              fontSize: "36px",
-              fontWeight: 700,
-              color: colors.primary,
-              marginBottom: "40px",
-              textAlign: "center",
-            }}
-          >
-            Recommended Jobs
-          </h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-              gap: "24px",
-            }}
-          >
-            {[
-              {
-                role: "Senior Frontend Engineer",
-                company: "TechCorp Inc.",
-                loc: "Remote",
-                match: 95,
-                tags: ["React", "TypeScript", "Node.js"],
-              },
-              {
-                role: "Full Stack Developer",
-                company: "StartUp Flow",
-                loc: "New York, NY",
-                match: 88,
-                tags: ["Python", "Django", "React"],
-              },
-              {
-                role: "UI/UX Designer",
-                company: "Creative Studio",
-                loc: "London, UK",
-                match: 82,
-                tags: ["Figma", "Design Systems"],
-              },
-            ].map((job, i) => (
-              <div
-                key={i}
-                className="hover-card"
-                style={{
-                  padding: "24px",
-                  background: "white",
-                  borderRadius: "12px",
-                  border: `1px solid ${colors.border}`,
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "12px",
-                    right: "12px",
-                    background: `${colors.success}15`,
-                    color: colors.success,
-                    padding: "4px 12px",
-                    borderRadius: "20px",
-                    fontSize: "12px",
-                    fontWeight: 700,
-                  }}
-                >
-                  {job.match}% Match
-                </div>
-                <h3
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    marginBottom: "4px",
-                    color: colors.primary,
-                  }}
-                >
-                  {job.role}
-                </h3>
-                <p
-                  style={{
-                    color: colors.textLight,
-                    fontSize: "14px",
-                    marginBottom: "16px",
-                  }}
-                >
-                  {job.company} • {job.loc}
-                </p>
-                <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-                  {job.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      style={{
-                        background: colors.background,
-                        padding: "4px 12px",
-                        borderRadius: "4px",
-                        fontSize: "12px",
-                        color: colors.textLight,
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <button
-                  style={{
-                    marginTop: "20px",
-                    width: "100%",
-                    padding: "10px",
-                    background: colors.primary,
-                    color: "white",
-                    border: "none",
-                    borderRadius: "6px",
-                    fontWeight: 600,
-                    cursor: "pointer",
-                  }}
-                >
-                  Apply Now
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div style={{ padding: "100px 20px", background: colors.background }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "60px" }}>
-            <h2
-              style={{
-                fontSize: "36px",
-                fontWeight: 700,
-                color: colors.primary,
-                marginBottom: "16px",
-              }}
-            >
-              How It Works
-            </h2>
-            <p style={{ fontSize: "18px", color: colors.textLight }}>
-              Three simple steps to your new career
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-              gap: "40px",
-            }}
-          >
-            {[
-              {
-                title: "Choose a Template",
-                desc: "Select from our collection of ATS-friendly, professionally designed templates.",
-                icon: <Layout size={32} />,
-              },
-              {
-                title: "Enter Your Details",
-                desc: "Fill in your experience and skills. Our AI helper will write the descriptions for you.",
-                icon: <PenTool size={32} />,
-              },
-              {
-                title: "Download & Apply",
-                desc: "Export your resume as a PDF and start applying to jobs immediately.",
-                icon: <Download size={32} />,
-              },
-            ].map((step, i) => (
-              <div
-                key={i}
-                className="hover-card"
-                style={{
-                  background: colors.surface,
-                  padding: "40px",
-                  borderRadius: "16px",
-                  border: `1px solid ${colors.border} `,
-                }}
-              >
-                <div
-                  style={{
-                    width: "60px",
-                    height: "60px",
-                    background: "#EFF6FF",
-                    borderRadius: "12px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: colors.accent,
-                    marginBottom: "24px",
-                  }}
-                >
-                  {step.icon}
-                </div>
-                <h3
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: 700,
-                    color: colors.primary,
-                    marginBottom: "12px",
-                  }}
-                >
-                  {step.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "16px",
-                    color: colors.textLight,
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {step.desc}
                 </p>
               </div>
             ))}
@@ -2383,36 +2393,53 @@ const Dashboard = ({ onLogout }: { onLogout: () => void }) => {
   });
 
   const handleDownloadPDF = async () => {
-    // Corrected target ID
-    const element = document.getElementById("resume-preview-content");
-    if (!element) {
-      console.error("Preview element not found");
-      return;
-    }
+  const element = document.getElementById("resume-preview-content");
+  if (!element) {
+    console.error("Preview element not found");
+    return;
+  }
 
-    try {
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-      });
+  // Clone the element to avoid messing with the live view
+  const clone = element.cloneNode(true) as HTMLElement;
+  
+  // Reset scaling and positioning for the clone
+  clone.style.transform = "none";
+  clone.style.position = "absolute";
+  clone.style.top = "-9999px";
+  clone.style.left = "-9999px";
+  clone.style.width = "210mm"; // A4 width
+  clone.style.minHeight = "297mm"; // A4 height
+  clone.style.background = "white";
+  
+  document.body.appendChild(clone);
 
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4",
-      });
+  try {
+    const canvas = await html2canvas(clone, {
+      scale: 2, // Higher scale for better quality
+      useCORS: true,
+      logging: false,
+      windowWidth: clone.scrollWidth,
+      windowHeight: clone.scrollHeight
+    });
 
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+    });
 
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`${resume.fullName.replace(/\s+/g, "_")}_Resume.pdf`);
-    } catch (error) {
-      console.error("Error generating PDF:", error);
-    }
-  };
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save(`${resume.fullName.replace(/\s+/g, "_")}_Resume.pdf`);
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+  } finally {
+    document.body.removeChild(clone);
+  }
+};
 
   const handleShareLinkedIn = () => {
     // This simulates sharing. In a real app, you would share a public URL.
