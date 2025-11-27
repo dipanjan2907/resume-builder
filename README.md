@@ -119,8 +119,4 @@ This project is open-source under the MIT License.
 ```
 
 ---
-
-If you want, I can also **make a more “fancy GitHub-ready” version** with badges (like build status, license, GitHub pages link) and a demo screenshot — it’ll make your repo look professional AF.
-
-Do you want me to do that?
 ```
