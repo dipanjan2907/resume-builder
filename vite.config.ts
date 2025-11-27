@@ -2,14 +2,22 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
+  base: "/resume-builder/", // GitHub Pages repo name
   plugins: [react()],
-  server: {
-    port: 5173,
-    open: true,
-    strictPort: false,
-  },
-  build: {
-    outDir: "dist",
-    sourcemap: true,
-  },
 });
+
+// import { defineConfig } from "vite";
+// import react from "@vitejs/plugin-react";
+
+// export default defineConfig({
+//   plugins: [react()],
+//   server: {
+//     port: 5173,
+//     open: true,
+//     strictPort: false,
+//   },
+//   build: {
+//     outDir: "dist",
+//     sourcemap: true,
+//   },
+// });

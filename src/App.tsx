@@ -3,11 +3,12 @@ import { AIAssistant } from "./AIAssistant";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { LoginView } from "./LoginView";
-import logo from "./dist/assets/logo.png";
-import logo1 from "./dist/assets/logo1.png";
 import { StrengthMeter } from "./components/StrengthMeter";
 import { JobMatcher } from "./components/JobMatcher";
 import { WebProfile } from "./components/WebProfile";
+import logo from ".src/assets/logo.png";
+import logo1 from ".src/assets/logo1.png";
+
 import {
   FileText,
   User,
