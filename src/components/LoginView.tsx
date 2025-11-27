@@ -86,17 +86,14 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
         <div style={{ marginBottom: "40px" }}>
           <div
             style={{
-              width: "48px",
-              height: "48px",
+              padding: "12px",
               background: "linear-gradient(135deg, #3498DB 0%, #2C3E50 100%)",
               borderRadius: "12px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "white",
-              fontWeight: "bold",
-              fontSize: "24px",
               marginBottom: "24px",
+              width: "fit-content",
             }}
           >
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -104,10 +101,12 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
                 src={logo}
                 alt="Xenvra"
                 style={{
-                  height: "50px", // Adjust height to fit your navbar
+                  height: "40px",
                   width: "auto",
                   backgroundColor: "white",
                   objectFit: "contain",
+                  borderRadius: "4px",
+                  padding: "2px",
                 }}
               />
             </div>
