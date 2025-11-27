@@ -8,6 +8,7 @@ import { JobMatcher } from "./components/JobMatcher";
 import { WebProfile } from "./components/WebProfile";
 import logo from "./assets/logo.png";
 import logo1 from "./assets/logo1.png";
+import resumePreview from "./assets/resume-preview.png";
 import "./index.css";
 
 import {
@@ -777,6 +778,299 @@ const HomeView = ({ setCurrentView }: any) => {
         </div>
       </div>
 
+      {/* Why Choose Xenvra Section */}
+      <div style={{ padding: "80px 20px", background: "white" }}>
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "60px",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <h2
+              style={{
+                fontSize: "36px",
+                fontWeight: 700,
+                color: colors.primary,
+                marginBottom: "24px",
+              }}
+            >
+              Why Choose Xenvra?
+            </h2>
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              {[
+                {
+                  icon: <Zap size={24} color={colors.accent} />,
+                  title: "AI-Powered Writing",
+                  desc: "Generate professional content instantly with our advanced AI.",
+                },
+                {
+                  icon: <Layout size={24} color={colors.accent} />,
+                  title: "ATS-Friendly Templates",
+                  desc: "Designs optimized to pass Applicant Tracking Systems.",
+                },
+                {
+                  icon: <Shield size={24} color={colors.accent} />,
+                  title: "Real-Time Preview",
+                  desc: "See changes instantly as you edit your resume.",
+                },
+              ].map((item, i) => (
+                <div key={i} style={{ display: "flex", gap: "16px" }}>
+                  <div
+                    style={{
+                      background: `${colors.accent}15`,
+                      padding: "12px",
+                      borderRadius: "12px",
+                      height: "fit-content",
+                    }}
+                  >
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h3
+                      style={{
+                        fontSize: "18px",
+                        fontWeight: 600,
+                        marginBottom: "4px",
+                        color: colors.primary,
+                      }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p style={{ color: colors.textLight, lineHeight: "1.5" }}>
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div
+            style={{
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                inset: "0",
+                background: colors.accent,
+                filter: "blur(40px)",
+                opacity: 0.2,
+                borderRadius: "50%",
+              }}
+            />
+            <img
+              src={resumePreview}
+              alt="Resume Preview"
+              style={{
+                width: "100%",
+                maxWidth: "400px",
+                borderRadius: "12px",
+                boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
+                transform: "rotate(2deg)",
+                position: "relative",
+                zIndex: 1,
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div style={{ padding: "80px 20px", background: colors.background }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h2
+            style={{
+              fontSize: "36px",
+              fontWeight: 700,
+              color: colors.primary,
+              marginBottom: "40px",
+              textAlign: "center",
+            }}
+          >
+            Frequently Asked Questions
+          </h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            {[
+              {
+                q: "Is Xenvra free to use?",
+                a: "Yes, Xenvra offers a free tier that allows you to build and download your resume. Premium features are available for advanced users.",
+              },
+              {
+                q: "Are the templates ATS-friendly?",
+                a: "Absolutely. All our templates are designed to be easily readable by Applicant Tracking Systems used by major companies.",
+              },
+              {
+                q: "Can I download my resume as PDF?",
+                a: "Yes, you can download your resume in high-quality PDF format instantly.",
+              },
+              {
+                q: "How does the AI writer work?",
+                a: "Our AI analyzes your job title and generates professional descriptions and summaries tailored to your role.",
+              },
+            ].map((faq, i) => (
+              <div
+                key={i}
+                style={{
+                  background: "white",
+                  padding: "24px",
+                  borderRadius: "12px",
+                  border: `1px solid ${colors.border}`,
+                }}
+              >
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    marginBottom: "8px",
+                    color: colors.primary,
+                  }}
+                >
+                  {faq.q}
+                </h3>
+                <p style={{ color: colors.textLight, lineHeight: "1.6" }}>
+                  {faq.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Job Recommendations Section */}
+      <div style={{ padding: "80px 20px", background: "white" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h2
+            style={{
+              fontSize: "36px",
+              fontWeight: 700,
+              color: colors.primary,
+              marginBottom: "40px",
+              textAlign: "center",
+            }}
+          >
+            Recommended Jobs
+          </h2>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: "24px",
+            }}
+          >
+            {[
+              {
+                role: "Senior Frontend Engineer",
+                company: "TechCorp Inc.",
+                loc: "Remote",
+                match: 95,
+                tags: ["React", "TypeScript", "Node.js"],
+              },
+              {
+                role: "Full Stack Developer",
+                company: "StartUp Flow",
+                loc: "New York, NY",
+                match: 88,
+                tags: ["Python", "Django", "React"],
+              },
+              {
+                role: "UI/UX Designer",
+                company: "Creative Studio",
+                loc: "London, UK",
+                match: 82,
+                tags: ["Figma", "Design Systems"],
+              },
+            ].map((job, i) => (
+              <div
+                key={i}
+                className="hover-card"
+                style={{
+                  padding: "24px",
+                  background: "white",
+                  borderRadius: "12px",
+                  border: `1px solid ${colors.border}`,
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "12px",
+                    right: "12px",
+                    background: `${colors.success}15`,
+                    color: colors.success,
+                    padding: "4px 12px",
+                    borderRadius: "20px",
+                    fontSize: "12px",
+                    fontWeight: 700,
+                  }}
+                >
+                  {job.match}% Match
+                </div>
+                <h3
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: 700,
+                    marginBottom: "4px",
+                    color: colors.primary,
+                  }}
+                >
+                  {job.role}
+                </h3>
+                <p
+                  style={{
+                    color: colors.textLight,
+                    fontSize: "14px",
+                    marginBottom: "16px",
+                  }}
+                >
+                  {job.company} • {job.loc}
+                </p>
+                <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                  {job.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        background: colors.background,
+                        padding: "4px 12px",
+                        borderRadius: "4px",
+                        fontSize: "12px",
+                        color: colors.textLight,
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <button
+                  style={{
+                    marginTop: "20px",
+                    width: "100%",
+                    padding: "10px",
+                    background: colors.primary,
+                    color: "white",
+                    border: "none",
+                    borderRadius: "6px",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
+                >
+                  Apply Now
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div style={{ padding: "100px 20px", background: colors.background }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "60px" }}>
@@ -959,6 +1253,7 @@ const BuilderView = ({
           </span>
         </div>
         <div style={{ display: "flex", gap: "12px" }}>
+
           <button
             onClick={() => setIsJobMatcherOpen(true)}
             style={{
@@ -974,8 +1269,9 @@ const BuilderView = ({
               gap: "8px",
             }}
           >
-            <CheckCircle size={16} /> Job Match
+            <Briefcase size={16} /> Job Match
           </button>
+
           <button
             onClick={() => setCurrentView("webprofile")}
             style={{
@@ -2052,12 +2348,12 @@ const Dashboard = ({ onLogout }: { onLogout: () => void }) => {
 
   // Resume Data State
   const [resume, setResume] = useState<ResumeData>({
-    fullName: "Karan Ray",
+    fullName: "Dipanjan Sadhukhan",
     title: "Software Engineer",
-    email: "karanray06@gmail.com",
-    phone: "+91 98765 43210",
-    location: "Liuah, Howrah",
-    website: "linkedin.com/in/karanray",
+    email: "dipanjan.sadhukhan@example.com",
+    phone: "0000000000",
+    location: "Kolkata, India",
+    website: "linkedin.com/in/dipanjansadhukhan",
     summary:
       "Passionate software engineer with experience in building scalable web applications. Dedicated to writing clean, maintainable code and solving complex problems.",
     skills: ["JavaScript", "TypeScript", "React", "Node.js", "HTML/CSS", "Git"],
