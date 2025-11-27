@@ -8,7 +8,7 @@ import { JobMatcher } from "./components/JobMatcher";
 import { WebProfile } from "./components/WebProfile";
 import logo from "./assets/logo.png";
 import logo1 from "./assets/logo1.png";
-import resumePreview from "./assets/resume-preview.png";
+import resumePreview from "./assets/resume-preview-realistic.png";
 import "./index.css";
 
 import {
@@ -620,7 +620,7 @@ const ResumePreview = ({ template, resume, colors, id }: any) => {
 };
 
 // --- Home View ---
-const HomeView = ({ setCurrentView }: any) => {
+const HomeView = ({ setCurrentView, resume }: any) => {
   return (
     <div
       style={{
@@ -901,30 +901,41 @@ const HomeView = ({ setCurrentView }: any) => {
             Recommended Jobs
           </h2>
           <p style={{ textAlign: "center", color: colors.textLight, marginTop: "10px" }}>
-            Top opportunities curated for you
+            Top opportunities curated for you based on your skills
           </p>
         </div>
         
         <div className="logo-track" style={{ gap: "24px", padding: "20px 0" }}>
-          {[
-            { role: "Senior React Developer", company: "TechMahindra", loc: "Bengaluru, India", match: 98, tags: ["React", "Redux", "TypeScript"] },
-            { role: "Full Stack Engineer", company: "Swiggy", loc: "Bengaluru, India", match: 95, tags: ["Node.js", "React", "AWS"] },
-            { role: "Frontend Engineer", company: "Razorpay", loc: "Bengaluru, India", match: 92, tags: ["React", "Design Systems"] },
-            { role: "SDE II", company: "Flipkart", loc: "Bengaluru, India", match: 90, tags: ["Java", "Spring Boot", "React"] },
-            { role: "Product Engineer", company: "Postman", loc: "Bengaluru, India", match: 88, tags: ["JavaScript", "API", "React"] },
-            { role: "UI Developer", company: "Zomato", loc: "Gurugram, India", match: 85, tags: ["Vue.js", "CSS", "HTML"] },
-            { role: "Software Engineer", company: "Microsoft", loc: "Hyderabad, India", match: 96, tags: ["C#", ".NET", "React"] },
-            { role: "Backend Developer", company: "Zerodha", loc: "Bengaluru, India", match: 89, tags: ["Go", "PostgreSQL"] },
-            // Duplicates for seamless scroll
-            { role: "Senior React Developer", company: "TechMahindra", loc: "Bengaluru, India", match: 98, tags: ["React", "Redux", "TypeScript"] },
-            { role: "Full Stack Engineer", company: "Swiggy", loc: "Bengaluru, India", match: 95, tags: ["Node.js", "React", "AWS"] },
-            { role: "Frontend Engineer", company: "Razorpay", loc: "Bengaluru, India", match: 92, tags: ["React", "Design Systems"] },
-            { role: "SDE II", company: "Flipkart", loc: "Bengaluru, India", match: 90, tags: ["Java", "Spring Boot", "React"] },
-            { role: "Product Engineer", company: "Postman", loc: "Bengaluru, India", match: 88, tags: ["JavaScript", "API", "React"] },
-            { role: "UI Developer", company: "Zomato", loc: "Gurugram, India", match: 85, tags: ["Vue.js", "CSS", "HTML"] },
-            { role: "Software Engineer", company: "Microsoft", loc: "Hyderabad, India", match: 96, tags: ["C#", ".NET", "React"] },
-            { role: "Backend Developer", company: "Zerodha", loc: "Bengaluru, India", match: 89, tags: ["Go", "PostgreSQL"] },
-          ].map((job, i) => (
+          {((resumeData) => {
+             const allJobs = [
+              { role: "Senior React Developer", company: "TechMahindra", loc: "Bengaluru, India", tags: ["React", "Redux", "TypeScript"] },
+              { role: "Full Stack Engineer", company: "Swiggy", loc: "Bengaluru, India", tags: ["Node.js", "React", "AWS"] },
+              { role: "Frontend Engineer", company: "Razorpay", loc: "Bengaluru, India", tags: ["React", "Design Systems"] },
+              { role: "SDE II", company: "Flipkart", loc: "Bengaluru, India", tags: ["Java", "Spring Boot", "React"] },
+              { role: "Product Engineer", company: "Postman", loc: "Bengaluru, India", tags: ["JavaScript", "API", "React"] },
+              { role: "UI Developer", company: "Zomato", loc: "Gurugram, India", tags: ["Vue.js", "CSS", "HTML"] },
+              { role: "Software Engineer", company: "Microsoft", loc: "Hyderabad, India", tags: ["C#", ".NET", "React"] },
+              { role: "Backend Developer", company: "Zerodha", loc: "Bengaluru, India", tags: ["Go", "PostgreSQL"] },
+              { role: "Data Scientist", company: "Fractal", loc: "Mumbai, India", tags: ["Python", "Machine Learning", "SQL"] },
+              { role: "DevOps Engineer", company: "Paytm", loc: "Noida, India", tags: ["Docker", "Kubernetes", "AWS"] },
+              { role: "Mobile Developer", company: "Ola", loc: "Bengaluru, India", tags: ["Flutter", "Dart", "iOS"] },
+              { role: "QA Engineer", company: "BrowserStack", loc: "Mumbai, India", tags: ["Selenium", "Java", "Testing"] },
+            ];
+
+            // Calculate match score based on resume skills
+            const scoredJobs = allJobs.map(job => {
+              const matchingTags = job.tags.filter(tag => 
+                resumeData.skills.some((skill: string) => skill.toLowerCase().includes(tag.toLowerCase()) || tag.toLowerCase().includes(skill.toLowerCase()))
+              );
+              const score = Math.round((matchingTags.length / job.tags.length) * 100) || 40; // Default to 40% if no match
+              return { ...job, match: score };
+            });
+
+            // Sort by match score descending
+            const sortedJobs = scoredJobs.sort((a, b) => b.match - a.match);
+            
+            // Duplicate for seamless scroll
+            return [...sortedJobs, ...sortedJobs].map((job, i) => (
             <div
               key={i}
               className="hover-card"
@@ -1003,7 +1014,8 @@ const HomeView = ({ setCurrentView }: any) => {
                 Apply Now
               </button>
             </div>
-          ))}
+          ));
+          })(resume)}
         </div>
       </div>
 
@@ -2410,6 +2422,8 @@ const Dashboard = ({ onLogout }: { onLogout: () => void }) => {
   clone.style.width = "210mm"; // A4 width
   clone.style.minHeight = "297mm"; // A4 height
   clone.style.background = "white";
+  clone.style.padding = "20mm"; // Add margins
+  clone.style.boxSizing = "border-box"; // Ensure padding is included in width
   
   document.body.appendChild(clone);
 
@@ -2553,7 +2567,7 @@ const Dashboard = ({ onLogout }: { onLogout: () => void }) => {
       </header>
 
       <main>
-        {currentView === "home" && <HomeView setCurrentView={setCurrentView} />}
+        {currentView === "home" && <HomeView setCurrentView={setCurrentView} resume={resume} />}
         {currentView === "builder" && (
           <BuilderView
             resume={resume}
