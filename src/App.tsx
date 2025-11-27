@@ -8,15 +8,7 @@ import { JobMatcher } from "./components/JobMatcher";
 import { WebProfile } from "./components/WebProfile";
 import logo from "./assets/logo.png";
 import logo1 from "./assets/logo1.png";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./index.css"; // if you have CSS
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import "./index.css";
 
 import {
   FileText,
