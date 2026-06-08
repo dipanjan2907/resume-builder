@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AIAssistant } from "./components/AIAssistant";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -888,8 +888,16 @@ const HomeView = ({ setCurrentView, resume }: any) => {
       </div>
 
       {/* Recommended Jobs Section (Scrolling) */}
-      <div style={{ padding: "80px 0", background: "white", overflow: "hidden" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto 40px", padding: "0 20px" }}>
+      <div
+        style={{ padding: "80px 0", background: "white", overflow: "hidden" }}
+      >
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto 40px",
+            padding: "0 20px",
+          }}
+        >
           <h2
             style={{
               fontSize: "36px",
@@ -900,121 +908,199 @@ const HomeView = ({ setCurrentView, resume }: any) => {
           >
             Recommended Jobs
           </h2>
-          <p style={{ textAlign: "center", color: colors.textLight, marginTop: "10px" }}>
+          <p
+            style={{
+              textAlign: "center",
+              color: colors.textLight,
+              marginTop: "10px",
+            }}
+          >
             Top opportunities curated for you based on your skills
           </p>
         </div>
-        
+
         <div className="logo-track" style={{ gap: "24px", padding: "20px 0" }}>
           {((resumeData) => {
-             const allJobs = [
-              { role: "Senior React Developer", company: "TechMahindra", loc: "Bengaluru, India", tags: ["React", "Redux", "TypeScript"] },
-              { role: "Full Stack Engineer", company: "Swiggy", loc: "Bengaluru, India", tags: ["Node.js", "React", "AWS"] },
-              { role: "Frontend Engineer", company: "Razorpay", loc: "Bengaluru, India", tags: ["React", "Design Systems"] },
-              { role: "SDE II", company: "Flipkart", loc: "Bengaluru, India", tags: ["Java", "Spring Boot", "React"] },
-              { role: "Product Engineer", company: "Postman", loc: "Bengaluru, India", tags: ["JavaScript", "API", "React"] },
-              { role: "UI Developer", company: "Zomato", loc: "Gurugram, India", tags: ["Vue.js", "CSS", "HTML"] },
-              { role: "Software Engineer", company: "Microsoft", loc: "Hyderabad, India", tags: ["C#", ".NET", "React"] },
-              { role: "Backend Developer", company: "Zerodha", loc: "Bengaluru, India", tags: ["Go", "PostgreSQL"] },
-              { role: "Data Scientist", company: "Fractal", loc: "Mumbai, India", tags: ["Python", "Machine Learning", "SQL"] },
-              { role: "DevOps Engineer", company: "Paytm", loc: "Noida, India", tags: ["Docker", "Kubernetes", "AWS"] },
-              { role: "Mobile Developer", company: "Ola", loc: "Bengaluru, India", tags: ["Flutter", "Dart", "iOS"] },
-              { role: "QA Engineer", company: "BrowserStack", loc: "Mumbai, India", tags: ["Selenium", "Java", "Testing"] },
+            const allJobs = [
+              {
+                role: "Senior React Developer",
+                company: "TechMahindra",
+                loc: "Bengaluru, India",
+                tags: ["React", "Redux", "TypeScript"],
+              },
+              {
+                role: "Full Stack Engineer",
+                company: "Swiggy",
+                loc: "Bengaluru, India",
+                tags: ["Node.js", "React", "AWS"],
+              },
+              {
+                role: "Frontend Engineer",
+                company: "Razorpay",
+                loc: "Bengaluru, India",
+                tags: ["React", "Design Systems"],
+              },
+              {
+                role: "SDE II",
+                company: "Flipkart",
+                loc: "Bengaluru, India",
+                tags: ["Java", "Spring Boot", "React"],
+              },
+              {
+                role: "Product Engineer",
+                company: "Postman",
+                loc: "Bengaluru, India",
+                tags: ["JavaScript", "API", "React"],
+              },
+              {
+                role: "UI Developer",
+                company: "Zomato",
+                loc: "Gurugram, India",
+                tags: ["Vue.js", "CSS", "HTML"],
+              },
+              {
+                role: "Software Engineer",
+                company: "Microsoft",
+                loc: "Hyderabad, India",
+                tags: ["C#", ".NET", "React"],
+              },
+              {
+                role: "Backend Developer",
+                company: "Zerodha",
+                loc: "Bengaluru, India",
+                tags: ["Go", "PostgreSQL"],
+              },
+              {
+                role: "Data Scientist",
+                company: "Fractal",
+                loc: "Mumbai, India",
+                tags: ["Python", "Machine Learning", "SQL"],
+              },
+              {
+                role: "DevOps Engineer",
+                company: "Paytm",
+                loc: "Noida, India",
+                tags: ["Docker", "Kubernetes", "AWS"],
+              },
+              {
+                role: "Mobile Developer",
+                company: "Ola",
+                loc: "Bengaluru, India",
+                tags: ["Flutter", "Dart", "iOS"],
+              },
+              {
+                role: "QA Engineer",
+                company: "BrowserStack",
+                loc: "Mumbai, India",
+                tags: ["Selenium", "Java", "Testing"],
+              },
             ];
 
             // Calculate match score based on resume skills
-            const scoredJobs = allJobs.map(job => {
-              const matchingTags = job.tags.filter(tag => 
-                resumeData.skills.some((skill: string) => skill.toLowerCase().includes(tag.toLowerCase()) || tag.toLowerCase().includes(skill.toLowerCase()))
+            const scoredJobs = allJobs.map((job) => {
+              const matchingTags = job.tags.filter((tag) =>
+                resumeData.skills.some(
+                  (skill: string) =>
+                    skill.toLowerCase().includes(tag.toLowerCase()) ||
+                    tag.toLowerCase().includes(skill.toLowerCase()),
+                ),
               );
-              const score = Math.round((matchingTags.length / job.tags.length) * 100) || 40; // Default to 40% if no match
+              const score =
+                Math.round((matchingTags.length / job.tags.length) * 100) || 40; // Default to 40% if no match
               return { ...job, match: score };
             });
 
             // Sort by match score descending
             const sortedJobs = scoredJobs.sort((a, b) => b.match - a.match);
-            
+
             // Duplicate for seamless scroll
             return [...sortedJobs, ...sortedJobs].map((job, i) => (
-            <div
-              key={i}
-              className="hover-card"
-              style={{
-                minWidth: "300px",
-                padding: "24px",
-                background: "white",
-                borderRadius: "12px",
-                border: `1px solid ${colors.border}`,
-                position: "relative",
-                flexShrink: 0,
-              }}
-            >
               <div
+                key={i}
+                className="hover-card"
                 style={{
-                  position: "absolute",
-                  top: "12px",
-                  right: "12px",
-                  background: `${colors.success}15`,
-                  color: colors.success,
-                  padding: "4px 12px",
-                  borderRadius: "20px",
-                  fontSize: "12px",
-                  fontWeight: 700,
+                  minWidth: "300px",
+                  padding: "24px",
+                  background: "white",
+                  borderRadius: "12px",
+                  border: `1px solid ${colors.border}`,
+                  position: "relative",
+                  flexShrink: 0,
                 }}
               >
-                {job.match}% Match
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "12px",
+                    right: "12px",
+                    background: `${colors.success}15`,
+                    color: colors.success,
+                    padding: "4px 12px",
+                    borderRadius: "20px",
+                    fontSize: "12px",
+                    fontWeight: 700,
+                  }}
+                >
+                  {job.match}% Match
+                </div>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: 700,
+                    marginBottom: "4px",
+                    color: colors.primary,
+                  }}
+                >
+                  {job.role}
+                </h3>
+                <p
+                  style={{
+                    color: colors.textLight,
+                    fontSize: "14px",
+                    marginBottom: "16px",
+                  }}
+                >
+                  {job.company} • {job.loc}
+                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "8px",
+                    flexWrap: "wrap",
+                    marginBottom: "16px",
+                  }}
+                >
+                  {job.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        background: colors.background,
+                        padding: "4px 12px",
+                        borderRadius: "4px",
+                        fontSize: "12px",
+                        color: colors.textLight,
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <button
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    background: colors.primary,
+                    color: "white",
+                    border: "none",
+                    borderRadius: "6px",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
+                >
+                  Apply Now
+                </button>
               </div>
-              <h3
-                style={{
-                  fontSize: "18px",
-                  fontWeight: 700,
-                  marginBottom: "4px",
-                  color: colors.primary,
-                }}
-              >
-                {job.role}
-              </h3>
-              <p
-                style={{
-                  color: colors.textLight,
-                  fontSize: "14px",
-                  marginBottom: "16px",
-                }}
-              >
-                {job.company} • {job.loc}
-              </p>
-              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "16px" }}>
-                {job.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      background: colors.background,
-                      padding: "4px 12px",
-                      borderRadius: "4px",
-                      fontSize: "12px",
-                      color: colors.textLight,
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <button
-                style={{
-                  width: "100%",
-                  padding: "10px",
-                  background: colors.primary,
-                  color: "white",
-                  border: "none",
-                  borderRadius: "6px",
-                  fontWeight: 600,
-                  cursor: "pointer",
-                }}
-              >
-                Apply Now
-              </button>
-            </div>
-          ));
+            ));
           })(resume)}
         </div>
       </div>
@@ -1042,7 +1128,9 @@ const HomeView = ({ setCurrentView, resume }: any) => {
             >
               Why Choose Xenvra?
             </h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+            >
               {[
                 {
                   icon: <Zap size={24} color={colors.accent} />,
@@ -1138,7 +1226,9 @@ const HomeView = ({ setCurrentView, resume }: any) => {
           >
             Frequently Asked Questions
           </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+          >
             {[
               {
                 q: "Is Xenvra free to use?",
@@ -1203,6 +1293,22 @@ const BuilderView = ({
   const [isAiOpen, setIsAiOpen] = useState(false);
   const [aiPrompt, setAiPrompt] = useState("");
   const [isJobMatcherOpen, setIsJobMatcherOpen] = useState(false);
+  const [skillsText, setSkillsText] = useState(resume.skills.join(", "));
+
+  // Keep local skillsText in sync with resume.skills when updated externally (e.g., from AI assistant)
+  useEffect(() => {
+    const parsedSkills = skillsText
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+    const isSame =
+      parsedSkills.length === resume.skills.length &&
+      parsedSkills.every((val, index) => val === resume.skills[index]);
+
+    if (!isSame) {
+      setSkillsText(resume.skills.join(", "));
+    }
+  }, [resume.skills]);
 
   const handleAskAI = (prompt: string) => {
     setAiPrompt(prompt);
@@ -1275,7 +1381,6 @@ const BuilderView = ({
           </span>
         </div>
         <div style={{ display: "flex", gap: "12px" }}>
-
           <button
             onClick={() => setIsJobMatcherOpen(true)}
             style={{
@@ -1529,7 +1634,7 @@ const BuilderView = ({
                       className="btn-ai"
                       onClick={() =>
                         handleAskAI(
-                          "Help me write a summary for a " + resume.title
+                          "Help me write a summary for a " + resume.title,
                         )
                       }
                     >
@@ -1562,7 +1667,7 @@ const BuilderView = ({
                         setResume({
                           ...resume,
                           experience: resume.experience.filter(
-                            (_: any, i: number) => i !== idx
+                            (_: any, i: number) => i !== idx,
                           ),
                         })
                       }
@@ -1649,7 +1754,7 @@ const BuilderView = ({
                               "Help me write a description for " +
                                 exp.jobTitle +
                                 " at " +
-                                exp.company
+                                exp.company,
                             )
                           }
                         >
@@ -1717,7 +1822,7 @@ const BuilderView = ({
                         setResume({
                           ...resume,
                           education: resume.education.filter(
-                            (_: any, i: number) => i !== idx
+                            (_: any, i: number) => i !== idx,
                           ),
                         })
                       }
@@ -1837,7 +1942,7 @@ const BuilderView = ({
                       className="btn-ai"
                       onClick={() =>
                         handleAskAI(
-                          "Suggest skills for a " + resume.title + " role"
+                          "Suggest skills for a " + resume.title + " role",
                         )
                       }
                     >
@@ -1847,16 +1952,18 @@ const BuilderView = ({
                   <textarea
                     className="input"
                     style={{ minHeight: "100px" }}
-                    value={resume.skills.join(", ")}
-                    onChange={(e) =>
+                    value={skillsText}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setSkillsText(val);
                       setResume({
                         ...resume,
-                        skills: e.target.value
+                        skills: val
                           .split(",")
                           .map((s) => s.trim())
                           .filter(Boolean),
-                      })
-                    }
+                      });
+                    }}
                   />
                 </div>
                 <div
@@ -2405,62 +2512,62 @@ const Dashboard = ({ onLogout }: { onLogout: () => void }) => {
   });
 
   const handleDownloadPDF = async () => {
-  const element = document.getElementById("resume-preview-content");
-  if (!element) {
-    console.error("Preview element not found");
-    return;
-  }
+    const element = document.getElementById("resume-preview-content");
+    if (!element) {
+      console.error("Preview element not found");
+      return;
+    }
 
-  // Clone the element to avoid messing with the live view
-  const clone = element.cloneNode(true) as HTMLElement;
-  
-  // Reset scaling and positioning for the clone
-  clone.style.transform = "none";
-  clone.style.position = "absolute";
-  clone.style.top = "-9999px";
-  clone.style.left = "-9999px";
-  clone.style.width = "210mm"; // A4 width
-  clone.style.minHeight = "297mm"; // A4 height
-  clone.style.background = "white";
-  clone.style.padding = "20mm"; // Add margins
-  clone.style.boxSizing = "border-box"; // Ensure padding is included in width
-  
-  document.body.appendChild(clone);
+    // Clone the element to avoid messing with the live view
+    const clone = element.cloneNode(true) as HTMLElement;
 
-  try {
-    const canvas = await html2canvas(clone, {
-      scale: 2, // Higher scale for better quality
-      useCORS: true,
-      logging: false,
-      windowWidth: clone.scrollWidth,
-      windowHeight: clone.scrollHeight
-    });
+    // Reset scaling and positioning for the clone
+    clone.style.transform = "none";
+    clone.style.position = "absolute";
+    clone.style.top = "-9999px";
+    clone.style.left = "-9999px";
+    clone.style.width = "210mm"; // A4 width
+    clone.style.minHeight = "297mm"; // A4 height
+    clone.style.background = "white";
+    clone.style.padding = "20mm"; // Add margins
+    clone.style.boxSizing = "border-box"; // Ensure padding is included in width
 
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF({
-      orientation: "portrait",
-      unit: "mm",
-      format: "a4",
-    });
+    document.body.appendChild(clone);
 
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    try {
+      const canvas = await html2canvas(clone, {
+        scale: 2, // Higher scale for better quality
+        useCORS: true,
+        logging: false,
+        windowWidth: clone.scrollWidth,
+        windowHeight: clone.scrollHeight,
+      });
 
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save(`${resume.fullName.replace(/\s+/g, "_")}_Resume.pdf`);
-  } catch (error) {
-    console.error("Error generating PDF:", error);
-  } finally {
-    document.body.removeChild(clone);
-  }
-};
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`${resume.fullName.replace(/\s+/g, "_")}_Resume.pdf`);
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    } finally {
+      document.body.removeChild(clone);
+    }
+  };
 
   const handleShareLinkedIn = () => {
     // This simulates sharing. In a real app, you would share a public URL.
     const url = encodeURIComponent("https://xenvra.com/resume/demo"); // Example URL
     window.open(
       `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-      "_blank"
+      "_blank",
     );
   };
 
@@ -2567,7 +2674,9 @@ const Dashboard = ({ onLogout }: { onLogout: () => void }) => {
       </header>
 
       <main>
-        {currentView === "home" && <HomeView setCurrentView={setCurrentView} resume={resume} />}
+        {currentView === "home" && (
+          <HomeView setCurrentView={setCurrentView} resume={resume} />
+        )}
         {currentView === "builder" && (
           <BuilderView
             resume={resume}
