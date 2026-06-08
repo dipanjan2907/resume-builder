@@ -120,7 +120,7 @@ const Root = () => {
   return (
     <>
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
-      {!showSplash && <App onLogout={() => setShowSplash(true)} />}
+      {!showSplash && <App />}
     </>
   );
 };

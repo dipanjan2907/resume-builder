@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { AIAssistant } from "./components/AIAssistant";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { LoginView } from "./components/LoginView";
 import { StrengthMeter } from "./components/StrengthMeter";
 import { JobMatcher } from "./components/JobMatcher";
 import { WebProfile } from "./components/WebProfile";
@@ -2470,7 +2469,7 @@ const SettingsView = ({ resume }: any) => (
 
 // --- Main Dashboard Component ---
 
-const Dashboard = ({ onLogout }: { onLogout: () => void }) => {
+const Dashboard = () => {
   const [currentView, setCurrentView] = useState("home");
   const [selectedTemplate, setSelectedTemplate] = useState("modern");
   const [activeSection, setActiveSection] = useState("personal");
@@ -2571,11 +2570,6 @@ const Dashboard = ({ onLogout }: { onLogout: () => void }) => {
     );
   };
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  if (!isAuthenticated) {
-    return <LoginView onLogin={() => setIsAuthenticated(true)} />;
-  }
 
   return (
     <div style={{ background: colors.surface, minHeight: "100vh" }}>
@@ -2655,22 +2649,6 @@ const Dashboard = ({ onLogout }: { onLogout: () => void }) => {
             </button>
           ))}
         </nav>
-
-        <button
-          onClick={onLogout}
-          style={{
-            padding: "10px 20px",
-            background: colors.danger, // Changed to red for prominence
-            color: "white", // White text
-            border: "none",
-            borderRadius: "4px",
-            fontSize: "13px",
-            fontWeight: 600,
-            cursor: "pointer",
-          }}
-        >
-          Logout
-        </button>
       </header>
 
       <main>
